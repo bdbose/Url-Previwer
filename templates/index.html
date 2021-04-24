@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url Previewer</title>
+  </head>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: #333;
+      color: white;
+    }
+    img {
+      height: 200px;
+      width: 275px;
+      object-fit: cover;
+    }
+    .preview-container {
+      display: flex;
+      align-items: center;
+      width: 80vw;
+      max-width: 800px;
+      padding: 10px;
+      box-shadow: 0 7px 8px 8px #494949;
+      border-radius: 10px;
+      background-color: #222;
+      margin-top: 10vh;
+    }
+    h3 {
+      font-weight: 400;
+    }
+    .des-details {
+      padding: 15px;
+    }
+    input {
+      padding: 5px;
+      max-width: 500px;
+      text-align: center;
+      border-radius: 10px;
+      width: 90%;
+    }
+    button {
+      border: 0;
+      padding: 10px 20px;
+      background: cyan;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: bold;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+    @media only screen and (max-width: 767px) {
+      .preview-container {
+        flex-direction: column;
+        width: fit-content;
+      }
+    }
+  </style>
+  <body>
+    <h1>Url Previewer</h1>
+    <input id="input-url" />
+    <button onclick="Search()">Search</button>
+    <div class="previewer"></div>
+    <script>
+      const previewer = document.getElementsByClassName('previewer')[0];
+      const Search = async () => {
+        previewer.innerHTML = '';
+        const value = document.getElementById('input-url').value;
+        const data = await fetch(`/api?url=${value}`);
+        const res = await data.json();
+        if (!res.done) {
+          previewer.innerHTML = `<h3>${res.message}</h3>`;
+          return;
+        }
+        previewer.innerHTML = `
+          <div class='preview-container'>
+            <img src=${res.thumbnail} alt=''  />
+            <div class='des-details'>
+              <h2>${res.title}</h2>
+              <h3>${res.descrp}</h3>
+            </div>
+          </div>`;
+      };
+    </script>
+  </body>
+</html>
