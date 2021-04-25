@@ -10,10 +10,10 @@
 ## Description:
 
 This helps to preview urls. Takes Url as input and returns thumbnail, title, and description of the url.
-Backend is made with Flask returns api [GET] `/api/?url=https:bosecode.netlify.app/` .
+Backend is made with Flask returns api [GET] `/api/?url=https://bosecode.netlify.app/` .
 Frontend is simple javascript ,html and css.
 
-# To setup
+# To setup and run
 
 ```
 pip install requirements.txt
