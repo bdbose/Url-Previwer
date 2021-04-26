@@ -16,7 +16,7 @@ Frontend is simple javascript ,html and css.
 # To setup and run
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 set FLASK_APP=app.py
 flask run
 
